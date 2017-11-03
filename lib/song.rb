@@ -33,6 +33,14 @@ class Song
     @@all.detect{|song| song.name == name}
   end
 
+  def self.create_from_filename(file_name)
+     song_array = file_name.split(" - ")
+     song_array[1].slice!".mp3"
+     new_song = Song.create_by_name(song_array[1])
+     new_song.artist_name = song_array[0]
+     new_song
+   end
+
   def self.find_or_create_by_name(name)
     if Song.find_by_name(name)!= nil
       Song.find_by_name(name)
